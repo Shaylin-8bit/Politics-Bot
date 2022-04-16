@@ -1,0 +1,19 @@
+{
+  "name": "politics-bot",
+  "version": "1.0.0",
+  "description": "Main bot for the Politics RP Discord server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node": "^16.14.2"
+  },
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
+}
