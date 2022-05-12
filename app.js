@@ -1,8 +1,18 @@
+// imports
+console.log('importing modules...');
 const { Client, Intents } = require('discord.js');
+console.log('importing components...');
 const parser = require('./components/parser.js');
-const globals = null;
+const database = require('./components/database.js');
+const commands = require('./components/commands.js');
+console.log('importing config file...');
+const config = require('./config.js');
 
-const prefix = 'p!';
+console.log('setting variables...');
+// variables
+const prefix = config.prefix;
+const globals = {};
+let db;
 
 const client = new Client(
   { intents: [
@@ -12,14 +22,46 @@ const client = new Client(
   ] 
 });
 
+const bot = {
+  db: db,
+  commands: commands,
+  globals: globals,
+  client: client,
+};
+
+
+// client set up
 client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`\nLogged in as ${client.user.tag}!`);
 });
 
 client.on('messageCreate', (msg) => {
   if (msg.content.substring(0, 2) === prefix) {
-    parser(client, globals, msg);
+    parser(bot, db, msg);
   }
 });
 
-client.login(process.env.BOT_TOKEN);
+
+// start function
+const start = async () => {
+  console.log('app starting...');
+  console.log('grabbing database...');
+  
+  db = await database.getDB();
+
+  console.log('grabbing globals...');
+
+  for (let attribute of db.attributes) {
+    console.log(`\t${attribute}`);
+    globals[attribute] = await db.getGlobals(attribute);
+  }
+
+  console.log(globals);
+  console.log('logging in...');
+  
+  client.login(process.env.BOT_TOKEN);
+};
+
+
+// start bot
+start();

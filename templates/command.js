@@ -1,17 +1,21 @@
 const command = {
   // command name
-  name: 'command name',
+  name: 'ping',
 
-  category: 'type of command',
-  
-  // first 64 chars shown by default
-  description: 'command description',
+  // command type
+  category: 'utility',
 
-  // if command requires globals cache
-  requiresCache: false, 
+  // description shown in help features
+  description: 'get bot latency',
 
-  // function to run
-  run: (client, globals, args, ctx) => {}
+  // list of database attributes that need to be cached
+  cache: [], 
+
+  // command to run
+  run: (msg, args, globals, bot) => {
+    msg.channel.send({content: 'pong!'});    
+  }
 };
 
+// export of command
 module.exports = command;

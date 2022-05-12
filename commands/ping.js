@@ -2,10 +2,10 @@ const command = {
   name: 'ping',
   category: 'utility',
   description: 'get bot latency',
-  requiresCache: false, 
+  cache: [], 
   
-  run: (client, globals, args, ctx) => {
-    ctx.channel.send({content: 'pong!'});    
+  run: (msg, args, globals, bot) => {
+    msg.channel.send({content: 'pong!'});    
   }
 };
 
