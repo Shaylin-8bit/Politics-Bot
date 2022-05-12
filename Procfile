@@ -1,2 +1,2 @@
-worker: node app.js
-web: node site.js
+worker: npm bot
+web: npm site
